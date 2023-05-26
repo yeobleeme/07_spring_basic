@@ -16,7 +16,5 @@ public class BoardVO {
 	private String content;
 	private Date createDate = new Date();
 	private int cnt;
-	
-	
 
 }
