@@ -17,8 +17,7 @@ import lombok.ToString;
 @Entity
 public class Board {
 
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
 	private Long seq;
 	private String title;
 	@Column(updatable = false)
@@ -26,17 +25,9 @@ public class Board {
 	private String content;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default now()")
 	private Date createDate;
-	@Column(insertable = false, updatable = true, columnDefinition = "bigint default 0")
+	@Column(insertable = false, updatable = true, columnDefinition = "bigint default 0")	
 	private long cnt;
-	
-	
 }
-
-
-
-
-
-
 
 
 

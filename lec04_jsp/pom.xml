@@ -48,19 +48,17 @@
 			<scope>test</scope>
 		</dependency>
 		
-		
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
 		<dependency>
-    		<groupId>org.apache.tomcat.embed</groupId>
-   			<artifactId>tomcat-embed-jasper</artifactId>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 		<dependency>
- 		   <groupId>javax.servlet</groupId>
-  		   <artifactId>jstl</artifactId>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
 		</dependency>
-		
 		
 	</dependencies>
 
