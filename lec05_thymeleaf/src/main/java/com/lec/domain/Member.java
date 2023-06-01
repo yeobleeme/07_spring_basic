@@ -12,27 +12,10 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Member {
-	
+
 	@Id
 	private String id;
-	
 	private String password;
-	
 	private String name;
-	
 	private String role;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

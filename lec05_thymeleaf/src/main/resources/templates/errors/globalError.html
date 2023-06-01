@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1><font color="red">Exception Occurred</font></h1>
+	<a th:href="@{/}">GoToHome</a>
+	<table>
+		<tr>
+			<th bgcolor="red" align="left">E.Message : [[ ${exception.message} ]]</th>
+		</tr>
+		<tr th:each="trace : ${exception.stackTrace}">
+			<td th:text="${trace}"></td>
+		</tr>
+	</table>
+</body>
+</html>

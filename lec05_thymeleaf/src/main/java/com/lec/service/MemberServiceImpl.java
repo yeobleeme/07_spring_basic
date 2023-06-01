@@ -10,28 +10,15 @@ import com.lec.persistence.MemberRepository;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+
 	@Autowired
-	private MemberRepository memberReposotory;
+	private MemberRepository memberRepository;
 	
 	@Override
 	public Member getMember(Member member) {
-		Optional<Member> findMember = memberReposotory.findById(member.getId());
+		Optional<Member> findMember = memberRepository.findById(member.getId());
 		if(findMember.isPresent()) 
-			return findMember.get();	
+			return findMember.get();			
 		else return null;
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-

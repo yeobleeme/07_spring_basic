@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void insertBoard(Board board) {
-		boardRepository.save(board);
+		boardRepository.save(board);		
 	}
 
 	@Override
@@ -43,18 +43,3 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

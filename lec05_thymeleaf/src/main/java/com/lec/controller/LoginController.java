@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.lec.domain.Member;
 import com.lec.service.MemberService;
@@ -15,37 +16,44 @@ import com.lec.service.MemberService;
 @Controller
 @SessionAttributes("member")
 public class LoginController {
-	
+
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/login")
+	@GetMapping("/login") 
 	public void loginView() {
 	}
 	
-	@PostMapping("/login")
-	public String login(Member member, Model model, HttpSession sess) {
+	@PostMapping("/login") 
+	public String login(Member member, Model model) {
 		// System.out.println("LogIn Success");
 		Member findMember = memberService.getMember(member);
-
+		
 		if(findMember != null && findMember.getPassword().equals(member.getPassword())) {
 			model.addAttribute("member", findMember);
-			// System.out.println("1... member" + findMember.toString());
 			return "forward:getBoardList";
 		} else {
-			return "redirect:login";
+			return "redirect:login";				
 		}
-			
-			
 	}
 	
-	@GetMapping("/logout")
-	public String logout() {
-		return "login";
-	}
+	@GetMapping("/logout") 
+	public String logout(SessionStatus status) {
+		status.setComplete();  // HttpSession.invalidate()
+		return "redirect:index.html";
+	}	
 	
-
+	
+	
+	
+	
+	
 }
+
+
+
+
+
 
 
 

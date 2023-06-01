@@ -2,6 +2,7 @@ package com.lec.controller;
 
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +19,16 @@ import com.lec.service.BoardService;
 @Controller
 @SessionAttributes("member")
 public class BoardController {
-	
+
 	@Autowired
 	private BoardService boardService;
 	
 	@RequestMapping("/getBoardList")
-	private String getBoardList(@ModelAttribute("member") Member member, Model model, Board board) {
+	public String getBoardList(@ModelAttribute("member") Member member, Model model, Board board) {
 		
 		if(member.getId() == null) {
 			return "redirect:login";
-		} 
+		}
 		List<Board> boardList = boardService.getBoardList(board);
 		model.addAttribute("boardList", boardList);
 		return "getBoardList";
@@ -38,10 +39,9 @@ public class BoardController {
 		
 		if(member.getId() == null) {
 			return "redirect:login";
-		} 
-		model.addAttribute("board", boardService.getBoard(board)); 
-		return "getBoard";	
-		
+		}
+		model.addAttribute("board", boardService.getBoard(board));
+		return "getBoard";
 	}
 	
 	@PostMapping("/updateBoard")
@@ -57,7 +57,7 @@ public class BoardController {
 	
 	@GetMapping("/insertBoard")
 	public String insertBoardView(@ModelAttribute("member") Member member) {
-		
+			
 		if(member.getId() == null) {
 			return "redirect:login";
 		}
@@ -66,10 +66,11 @@ public class BoardController {
 	
 	@PostMapping("/insertBoard")
 	public String insertBoard(@ModelAttribute("member") Member member, Board board) {
-		
+
 		if(member.getId() == null) {
 			return "redirect:login";
-		}
+		}	
+		
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
 	}
@@ -80,6 +81,7 @@ public class BoardController {
 		if(member.getId() == null) {
 			return "redirect:login";
 		}	
+
 		boardService.deleteBoard(board);
 		return "forward:getBoardList";
 	}
@@ -87,15 +89,14 @@ public class BoardController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-

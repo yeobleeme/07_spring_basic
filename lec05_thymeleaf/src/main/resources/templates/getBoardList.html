@@ -6,9 +6,10 @@
 </head>
 <body>
 	<div th:align="center">
-		<h3>Board List</h3>
+		<h1>Board List</h1>
+		<!-- <h3><font color="red" th:text="${session['member'].name}"></font>, Welcome!</h3>	 -->
 		<h3><font color="red" th:text="${session.member.name}"></font>, Welcome!</h3>
-		<a th:href="@{/logout}">LogOut</a>
+		<a th:href="@{/logout}">LogOut</a>	
 		<hr />
 		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
 			<tr>
@@ -23,22 +24,11 @@
 				<td><a th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a></td>
 				<td th:text="${board.writer}"></td>
 				<td th:text="${#dates.format(board.createDate, 'yyyy.MM.dd')}"></td>
-				<td th:text="${board.cnt}"></td>
+				<td th:text="${board.cnt}"></td>				
 			</tr>
 		</table>
 		<br />
 		<a th:href="insertBoard">Post</a>
-		
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

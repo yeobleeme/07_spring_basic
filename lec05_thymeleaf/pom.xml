@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lec</groupId>
-	<artifactId>lec05_thymeleaf</artifactId>
+	<artifactId>lec05_thymleaf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lec05_thymeleaf</name>
+	<name>lec05_thymleaf</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
