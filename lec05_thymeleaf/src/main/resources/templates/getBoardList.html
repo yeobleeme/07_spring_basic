@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:align="center">
+		<h3>Board List</h3>
+		<h3><font color="red" th:text="${session.member.name}"></font>, Welcome!</h3>
+		<a th:href="@{/logout}">LogOut</a>
+		<hr />
+		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
+			<tr>
+				<th bgcolor="orange" width="50">No</th>
+				<th bgcolor="orange" width="200">Title</th>
+				<th bgcolor="orange" width="100">Writer</th>
+				<th bgcolor="orange" width="100">Date</th>
+				<th bgcolor="orange" width="50">View</th>
+			</tr>
+			<tr th:each="board, state : ${boardList}">
+				<td th:text="${state.count}"></td> <!-- <td th:text="${board.seq}"></td> -->
+				<td><a th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a></td>
+				<td th:text="${board.writer}"></td>
+				<td th:text="${#dates.format(board.createDate, 'yyyy.MM.dd')}"></td>
+				<td th:text="${board.cnt}"></td>
+			</tr>
+		</table>
+		<br />
+		<a th:href="insertBoard">Post</a>
+		
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
