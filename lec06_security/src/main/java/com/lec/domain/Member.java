@@ -1,6 +1,8 @@
 package com.lec.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import lombok.Getter;
@@ -17,6 +19,16 @@ public class Member {
 	private String id;
 	private String password;
 	private String name;
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Role role;
+	private boolean enabled;
 	
 }
+
+
+
+
+
+
+
+

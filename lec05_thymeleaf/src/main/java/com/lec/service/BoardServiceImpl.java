@@ -13,6 +13,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
 	@Override
 	public List<Board> getBoardList(Board board) {
 		return (List<Board>) boardRepository.findAll();

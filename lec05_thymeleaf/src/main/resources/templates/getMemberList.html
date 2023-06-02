@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:align="center">
+		<h1>Member List</h1>
+		<h3><font color="red" th:text="${session.member.name}"></font>, Welcome!</h3>
+		<a th:href="@{/logout}">LogOut</a>	
+		<hr />
+		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
+			<tr>
+				<th bgcolor="orange" width="50">ID</th>
+				<th bgcolor="orange" width="200">PW</th>
+				<th bgcolor="orange" width="100">Name</th>
+				<th bgcolor="orange" width="100">ROLE</th>
+			</tr>
+			<tr th:each="member, state : ${memberList}">
+				<td th:text="${member.id}"></td>
+				<td th:text="${member.password}"></td>
+				<td th:text="${member.name}"></td>
+				<td th:text="${member.role}"></td>				
+			</tr>
+		</table>
+		<br />
+		<a th:href="getBoardList">BoardList</a>
+	</div>
+</body>
+</html>
