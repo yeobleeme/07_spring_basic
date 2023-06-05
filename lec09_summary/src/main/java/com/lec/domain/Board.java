@@ -44,7 +44,3 @@ public class Board {
 	@Transient
 	private MultipartFile uploadFile;	
 }
-
-
-
-

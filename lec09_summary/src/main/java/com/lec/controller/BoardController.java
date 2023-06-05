@@ -1,15 +1,19 @@
 package com.lec.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -17,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -49,7 +54,7 @@ public class BoardController {
 	public String uploadFolder;
 	
 	@Value("${path.download}")
-	public String downloadFolder;
+	public String downFolder;
 	
 	@ModelAttribute("member")
 	public Member setMember() {
@@ -157,10 +162,10 @@ public class BoardController {
 	
 	@GetMapping("/download")
 	public ResponseEntity<Resource> download(HttpServletRequest req, 
-			@RequestParam int seq, @RequestParam String fn) {
+			@RequestParam int seq, @RequestParam String fn) throws Exception {
 		req.setCharacterEncoding("utf-8");
 		String fileName = req.getParameter(fn);
-		Path filePath = Paths.get(downloadFolder + fileName).toAbsolutePath();
+		Path filePath = Paths.get(downFolder + fileName).toAbsolutePath();
 		Resource resource = null;
 		
 		try {
@@ -168,14 +173,52 @@ public class BoardController {
 			if(resource.exists()) {
 				return ResponseEntity.ok()
 						.contentType(MediaType.APPLICATION_OCTET_STREAM)
-						.header(HttpHeaders.CONTENT_DISPOSITION, null)
+						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" 
+								+ URLEncoder.encode(resource.getFilename(), "utf-8"))
+						.body(resource);			
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 	
+	// @RequestMapping("/download")
+	public void download(HttpServletRequest req, HttpServletResponse res) throws Exception { 	
+		req.setCharacterEncoding("utf-8");
+		String fileName = req.getParameter("fn");
+		
+		String fromPath = uploadFolder + fileName;
+		String toPath = uploadFolder + fileName;
 	
+		byte[] b = new byte[4096];
+		File f = new File(toPath);
+		FileInputStream fis = new FileInputStream(fromPath);
+		
+		String sMimeType = req.getSession().getServletContext().getMimeType(fromPath); // mimetype = file type : pdf, exe, txt.... 
+		if(sMimeType == null) sMimeType = "application/octet-stream";
+		
+		String sEncoding = new String(fileName.getBytes("utf-8"), "8859_1");
+		String sEncoding1 = URLEncoder.encode(fileName, "utf-8");
+		
+		res.setContentType(sMimeType);
+		res.setHeader("Content-Transfer-Encoding", "binary");
+		res.setHeader("Content-Disposition", "attachment; filename = " + sEncoding1);
+			
+		int numRead;
+		ServletOutputStream os = res.getOutputStream();
+	
+		while((numRead=fis.read(b, 0, b.length)) != -1 ) {
+			os.write(b, 0, numRead);
+		}
+		
+		os.flush();
+		os.close();
+		fis.close();
+		
+		// return "redirect:getBoardList";
+	}
 }
 
 

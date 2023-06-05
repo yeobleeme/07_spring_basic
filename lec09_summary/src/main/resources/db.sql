@@ -1,6 +1,6 @@
 create database spring;
 
-CREATE TABLE USERS (
+CREATE TABLE MEMBER (
   ID 				varchar(50) NOT NULL,
   PASSWORD  varchar(30) NOT NULL,
   NAME 			varchar(30) NOT NULL,
@@ -19,15 +19,16 @@ BEGIN NOT ATOMIC
 END;
 
 
+
 CREATE TABLE BOARD (
   seq 				int(11) 			NOT NULL AUTO_INCREMENT,
   title 			varchar(200) 	DEFAULT NULL,
   writer 			varchar(20) 	NOT NULL,
   content 		varchar(2000) NOT NULL,
-  regdate 		date DEFAULT 	sysdate(),
+  create_date 		date DEFAULT 	sysdate(),
   cnt 				int(11) 			DEFAULT 0,
-  filename 		varchar(255) 	DEFAULT NULL,
-  uploadfile 	varchar(255) 	DEFAULT NULL,
+  file_name 		varchar(255) 	DEFAULT NULL,
+  upload_file 	varchar(255) 	DEFAULT NULL,
   PRIMARY KEY (seq)
 );
 
