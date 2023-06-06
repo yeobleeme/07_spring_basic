@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="demo"/>
+<aop-project name="studio_yeoblee_crudprac"/>
+<aop-project name="lec09_summary"/>
 </aop-reference-model>
