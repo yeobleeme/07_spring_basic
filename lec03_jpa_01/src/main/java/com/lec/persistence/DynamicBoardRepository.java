@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.lec.domain.Board;
 
+// 
 public interface DynamicBoardRepository extends CrudRepository<Board, Long>, QuerydslPredicateExecutor<Board> {
 	
 	
