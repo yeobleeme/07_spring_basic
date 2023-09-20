@@ -25,7 +25,7 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  // Bean으로 작성해도 됨.
+  // Bean으로 작성해도 됨. 
   private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
